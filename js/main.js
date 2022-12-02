@@ -1,7 +1,8 @@
 ///constants/variables
-const warArray = [];
-const playerDeck = [];
-const cpuDeck = [];
+let warArrayPl1 = [];
+let warArrayCpu = [];
+let playerDeck = [];
+let cpuDeck = [];
 let playerCard = [];
 let cpuCard = [];
 let cards = [];
@@ -67,6 +68,7 @@ function createDeck() {
 
 //function to shuffle the deck of cards
 function shuffle(cards) {
+  console.log(cards);
   //starting at the length of the array minus 1, so we dont repeat the first card, for as long as i is greater than 0, subtract a card
   for (let i = cards.length - 1; i > 0; i--) {
     const r = Math.floor(Math.random() * (i + 1));
@@ -82,6 +84,7 @@ function shuffle(cards) {
 //function to deal cards to both players
 function handout(cards) {
   for (let i = 0; i < cards.length; i++) {
+    console.log(cards[i]);
     if (i % 2 === 0) {
       playerDeck.push(cards[i]);
     } else {
@@ -91,8 +94,6 @@ function handout(cards) {
   console.log("Player's deck: ", playerDeck);
   console.log("Opponent's deck: ", cpuDeck);
 }
-
-//function to pop cards from player/cpu deck into player/cpu hand
 
 //function to take the first card out of the players hand of cards array and render them as a faceoff
 function cardFaceoff() {
@@ -111,17 +112,15 @@ function compareValues(playerCard, cpuCard) {
     console.log("player1 wins!");
   } else if (playerCard.value < cpuCard.value) {
     cpuDeck.unshift(cpuCard, playerCard);
-    console.log('cpu wins!')
+    console.log("cpu wins!");
   } else {
-    console.log('tie!')
+    console.log("Tie!");
   }
 }
 
-
-function war(){
-  
-}
-//function to handle a tie(war)
+//function to decide a tie
+//first need to see if players have enough cards for a full war:
+//        if not 4,then 3. if not 3, then 2. if not 2, then 1. if not 1, then you lose.
 
 //function to take 3 cards out of each players deck array and place into a new warArray.
 // if not able to draw 3, as many as possible
