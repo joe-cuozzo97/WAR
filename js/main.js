@@ -2,36 +2,31 @@
 const warArray = [];
 const playerDeck = [];
 const cpuDeck = [];
-const playerCard = {};
-const cpuCard = {};
-let cards = []
+let playerCard = [];
+let cpuCard = [];
+let cards = [];
 
 const battleBtn = document.querySelector("#battle");
-const newGameBtn = document.querySelector("#newGame");
-const surrenderBtn = document.querySelector("#surrender");
-
+const startBtn = document.querySelector("#start");
+const restartBtn = document.querySelector("#restart");
 
 /*----- event listeners -----*/
-battleBtn.addEventListener("click", battle);
-newGameBtn.addEventListener("click", () => {
+battleBtn.addEventListener("click", () => {
+  cardFaceoff();
+});
+startBtn.addEventListener("click", () => {
   createDeck();
   shuffle(cards);
   handout(cards);
 });
-surrenderBtn.addEventListener("click", surrender);
-
 
 /*----- functions -----*/
 function battle() {
   console.log("works");
 }
 
-function newGame() {
-  console.log("New Game");
-}
-
-function surrender() {
-  console.log("I give up!");
+function startGame() {
+  console.log("START");
 }
 
 //Card object
@@ -41,6 +36,7 @@ function card(value, name, suit) {
   this.suit = suit;
 }
 
+//function to create a deck of 52 cards
 function createDeck() {
   this.names = [
     "1",
@@ -69,7 +65,9 @@ function createDeck() {
   return cards;
 }
 
+//function to shuffle the deck of cards
 function shuffle(cards) {
+  //starting at the length of the array minus 1, so we dont repeat the first card, for as long as i is greater than 0, subtract a card
   for (let i = cards.length - 1; i > 0; i--) {
     const r = Math.floor(Math.random() * (i + 1));
     const temp = cards[i];
@@ -81,30 +79,48 @@ function shuffle(cards) {
   return cards;
 }
 
+//function to deal cards to both players
 function handout(cards) {
-for(let i = 0; i < cards.length; i++){
-    if (i % 2 === 0){
-        playerDeck.push(cards[i])
-    } else{
-        cpuDeck.push(cards[i])
+  for (let i = 0; i < cards.length; i++) {
+    if (i % 2 === 0) {
+      playerDeck.push(cards[i]);
+    } else {
+      cpuDeck.push(cards[i]);
     }
-}  
-console.log("Player's hand: ", playerDeck)
-console.log("Opponent's hand: ", cpuDeck)
+  }
+  console.log("Player's deck: ", playerDeck);
+  console.log("Opponent's deck: ", cpuDeck);
 }
 
-//split the cards array in half randomly-two dif arrays
-//
-
+//function to pop cards from player/cpu deck into player/cpu hand
 
 //function to take the first card out of the players hand of cards array and render them as a faceoff
+function cardFaceoff() {
+  playerCard = playerDeck.pop();
+  console.log(playerCard);
+  cpuCard = cpuDeck.pop();
+  console.log(cpuCard);
+  compareValues(playerCard, cpuCard);
+}
+//so far, ive set draw1 to the value of the last card in the playerdeck array.then i push draw1 into the playercard array, as the first card they draw to faceoff
 
 //function to compare each players card
-// function if the players card is bigger, player wins
-// function if the cpu's card is bigger, cpu wins
-//function to update the total cards each player has
-//function to calculate each players points
+function compareValues(playerCard, cpuCard) {
+  if (playerCard.value > cpuCard.value) {
+    playerDeck.unshift(playerCard, cpuCard);
+    console.log("player1 wins!");
+  } else if (playerCard.value < cpuCard.value) {
+    cpuDeck.unshift(cpuCard, playerCard);
+    console.log('cpu wins!')
+  } else {
+    console.log('tie!')
+  }
+}
 
+
+function war(){
+  
+}
 //function to handle a tie(war)
 
 //function to take 3 cards out of each players deck array and place into a new warArray.
@@ -120,3 +136,9 @@ console.log("Opponent's hand: ", cpuDeck)
 // function to check if either player is out of cards
 //if cpu is out, player 1 wins
 //if player 1 is out, cpu wins
+
+//window onload
+
+//create a "start game" button, then "new game" is the reset
+//set boolean to false so that the start button cant be clicked while in a game
+//on the new game button if the card count is equal to zero then
