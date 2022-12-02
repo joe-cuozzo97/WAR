@@ -1,10 +1,10 @@
- ///constants/variables
-const  warArray = [];
+///constants/variables
+const warArray = [];
 const playerDeck = ''
 const cpuDeck = ''
 const playerCard = ''
 const cpuCard = ''
-const deck =[]
+const deck = []
 
 const battleBtn = document.querySelector('#battle');
 const newGameBtn = document.querySelector('#newGame')
@@ -18,61 +18,63 @@ const surrenderBtn = document.querySelector('#surrender')
 
 
 
-  /*----- cached elements  -----*/
+/*----- cached elements  -----*/
 
 
 
 
 
 
-  /*----- event listeners -----*/
-  battleBtn.addEventListener('click',battle);
-  newGameBtn.addEventListener('click',newGame);
-  surrenderBtn.addEventListener('click', surrender)
+/*----- event listeners -----*/
+battleBtn.addEventListener('click', battle);
+newGameBtn.addEventListener('click', createDeck);
+surrenderBtn.addEventListener('click', surrender)
+
+//
 
 
-
-
-  /*----- functions -----*/
-  function battle(){
+/*----- functions -----*/
+function battle() {
     console.log('works')
 }
 
-function newGame(){
+function newGame() {
     console.log('New Game')
 }
 
-function surrender(){
+function surrender() {
     console.log('I give up!')
 }
 
 //Card object
-function card(value, name, suit){
+function card(value, name, suit) {
     this.value = value;
     this.name - name;
     this.suit = suit;
 }
 
-function createDeck(){
+function createDeck() {
     this.names = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'j', 'q', 'k']
     this.suits = ['Diamonds', 'Spades', 'Clubs', 'Hearts']
     cards = []
+
+    for (let s = 0; s < this.suits.length; s++) {
+        for (let n = 0; n < this.names.length; n++) {
+            cards.push(new card(n + 1, this.names[n], this.suits[s]));
+        }
+    }
+    console.log('here are the cards: ', cards)
+    return cards;
+
+}
+
+
+function shuffle(cards){
+    
 }
 
 
 
-
-
-
-
-// function shuffleArray (){
-
-// for (i = .length -1 while i is greater than 0, i++){
-    let oneToTen = Math.ceil(Math.random() *10)
-    console.log(oneToTen)
-// }
-// return 
-// }
 
 
 
@@ -121,13 +123,9 @@ function createDeck(){
 //function to take the first card out of the players hand of cards array and render them as a faceoff
 
 //function to compare each players card 
-
-// function if the players card is bigger, player wins
-
+    // function if the players card is bigger, player wins
 // function if the cpu's card is bigger, cpu wins
-
 //function to update the total cards each player has
-
 //function to calculate each players points
 
 //function to handle a tie(war)
