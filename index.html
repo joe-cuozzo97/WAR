@@ -1,62 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WAR!</title>
-    <link rel="stylesheet" href="css/card-deck-css/css/cardstarter.css">
+    <link rel="stylesheet" href="css/card-deck-css/css/cardstarter.css" />
     <script defer src="js/main.js"></script>
-</head>
+  </head>
 
-<body>
-
+  <body>
     <div class="wrapper">
-        <div class="gameRules">
-            <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit id assumenda quibusdam, ut optio molestiae
-                perspiciatis quidem expedita modi ea obcaecati fugiat? Voluptas suscipit nihil molestias blanditiis
-                facere, in fuga?</p>
-        </div>
+      <div class="gameRules">
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit id
+          assumenda quibusdam, ut optio molestiae perspiciatis quidem expedita
+          modi ea obcaecati fugiat? Voluptas suscipit nihil molestias blanditiis
+          facere, in fuga?
+        </p>
+      </div>
 
+      <h1>War!</h1>
+      <div class="board"></div>
+      <div class="player1">
+        <p>PLAYER 1</p>
+        <p>SCORE:</p>
+        <div class="card shadow xlarge">cards</div>
+      </div>
+      <div class="cpu">
+        <p>CPU</p>
+        <p>SCORE:</p>
+        <div class="card shadow xlarge">cards</div>
+      </div>
 
-        <h1>War!</h1>
-        <div class="board">
-
-        </div>
-        <div class="player1">
-            <p>PLAYER 1</p>
-            <p>SCORE:</p>
-            <div class="card shadow xlarge">cards</div>
-
-        </div>
-        <div class="cpu ">
-            <p>CPU</p>
-            <p>SCORE:</p>
-            <div class="card shadow xlarge">cards</div>
-        </div>
-
-        <div class="cardPile1">
-            <p class="card"></p>
-        </div>
-        <div class="cardPileCpu">
-            <p class="card"></p>
-        </div>
-        <!-- //wouldnt work when i used classes for some reason -->
-        <div class="btns">
-            <button id="battle">Deal Cards</button>
-            <button id="surrender">Surrender</button>
-            <button id="newGame">New Game</button>
-
-
-        </div>
-
-
+      <div class="cardPile1">
+        <p class="card"></p>
+      </div>
+      <div class="cardPileCpu">
+        <p class="card"></p>
+      </div>
+      <!-- //wouldnt work when i used classes for some reason -->
+      <div class="btns">
+        <button id="battle">Draw</button>
+        <button id="surrender">Surrender</button>
+        <button id="newGame">New Game</button>
+      </div>
     </div>
-
-
-
-
-</body>
-
+  </body>
 </html>

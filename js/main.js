@@ -1,27 +1,25 @@
 ///constants/variables
 const warArray = [];
-// const playerDeck = [];
+const playerDeck = [];
 const cpuDeck = [];
 const playerCard = {};
 const cpuCard = {};
-const deck = [];
+let cards = []
 
 const battleBtn = document.querySelector("#battle");
 const newGameBtn = document.querySelector("#newGame");
 const surrenderBtn = document.querySelector("#surrender");
 
-/*----- cached elements  -----*/
 
 /*----- event listeners -----*/
 battleBtn.addEventListener("click", battle);
 newGameBtn.addEventListener("click", () => {
   createDeck();
   shuffle(cards);
-  handout(cards)
+  handout(cards);
 });
 surrenderBtn.addEventListener("click", surrender);
 
-//
 
 /*----- functions -----*/
 function battle() {
@@ -83,37 +81,21 @@ function shuffle(cards) {
   return cards;
 }
 
-// function handout(cards){
-//  playerDeck = cards.push(cards.splice(0, 25))
+function handout(cards) {
+for(let i = 0; i < cards.length; i++){
+    if (i % 2 === 0){
+        playerDeck.push(cards[i])
+    } else{
+        cpuDeck.push(cards[i])
+    }
+}  
+console.log("Player's hand: ", playerDeck)
+console.log("Opponent's hand: ", cpuDeck)
+}
 
-// console.log(playerDeck)
 //split the cards array in half randomly-two dif arrays
-// }
+//
 
-
-
-
-
-
-
-// use only render functions to update the DOM
-// function render(){
-//     renderDeck();
-//     renderCardSplit();
-//     renderScores();
-//     renderCelebration();
-//     renderNewGame();
-// }
-
-// if (player1 hand length === 0){
-//     console.log('cpu wins!')
-// }else {
-//     console.log('player1 wins!')
-// }
-
-// function to shuffle the deck
-
-// function to give each player half of the shuffled deck
 
 //function to take the first card out of the players hand of cards array and render them as a faceoff
 
