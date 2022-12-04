@@ -84,7 +84,6 @@ function shuffle(cards) {
 //function to deal cards to both players
 function handout(cards) {
   for (let i = 0; i < cards.length; i++) {
-    console.log(cards[i]);
     if (i % 2 === 0) {
       playerDeck.push(cards[i]);
     } else {
@@ -114,17 +113,39 @@ function compareValues(playerCard, cpuCard) {
     cpuDeck.unshift(cpuCard, playerCard);
     console.log("cpu wins!");
   } else {
-    console.log("Tie!");
+    war()
+    
   }
 }
 
-//function to decide a tie
-//first need to see if players have enough cards for a full war:
-//        if not 4,then 3. if not 3, then 2. if not 2, then 1. if not 1, then you lose.
+//function to check if both playters have enough cards to have a full war, and if not, use the amount of cards that the person with less cards has
+function war() {
+  let length = 0;
 
-//function to take 3 cards out of each players deck array and place into a new warArray.
-// if not able to draw 3, as many as possible
-//first check if both players have more than 4 cards in their deck array
+  if (playerDeck.length < 5 || cpuDeck.length < 5) {
+    if (playerDeck.length > cpuDeck.length) {
+      length = cpuDeck.length - 1;
+    } else if ([playerDeck].length < cpuDeck.length) {
+      length = playerDeck.length - 1;
+    }
+  } else {
+    length = 4;
+  }
+  for ( i = 0; i < length; i++) {
+    warArrayPl1.push(playerDeck[0]);
+    playerDeck.pop();
+    warArrayCpu.push(cpuDeck[0]);
+    cpuDeck.pop();
+
+   compareValues(warArrayPl1[0], warArrayCpu[0])
+    console.log("wartime");
+   
+   
+  }
+
+}
+
+
 
 //function to compare the final card that gets flipped from the war
 
