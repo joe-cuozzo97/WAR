@@ -62,7 +62,7 @@ function createDeck() {
       cards.push(new card(n + 1, this.names[n], this.suits[s]));
     }
   }
-  console.log("here are the cards: ", cards);
+  // console.log("here are the cards: ", cards);
   return cards;
 }
 
@@ -77,7 +77,7 @@ function shuffle(cards) {
     cards[i] = cards[r];
     cards[r] = temp;
   }
-  console.log("here are the shuffled cards: ", cards);
+  // console.log("here are the shuffled cards: ", cards);
   return cards;
 }
 
@@ -96,10 +96,11 @@ function handout(cards) {
 
 //function to take the first card out of the players hand of cards array and render them as a faceoff
 function cardFaceoff() {
-  playerCard = playerDeck.pop();
-  console.log(playerCard);
-  cpuCard = cpuDeck.pop();
-  console.log(cpuCard);
+  // console.log('player cards should be this', playerDeck.pop())
+  playerCard = playerDeck.shift();
+  console.log('players card is this', playerCard);
+  cpuCard = cpuDeck.shift();
+  console.log('cpu card is this', cpuCard);
   compareValues(playerCard, cpuCard);
 }
 //so far, ive set draw1 to the value of the last card in the playerdeck array.then i push draw1 into the playercard array, as the first card they draw to faceoff
@@ -107,14 +108,13 @@ function cardFaceoff() {
 //function to compare each players card
 function compareValues(playerCard, cpuCard) {
   if (playerCard.value > cpuCard.value) {
-    playerDeck.unshift(playerCard, cpuCard);
+    playerDeck.push(playerCard, cpuCard);
     console.log("player1 wins!");
   } else if (playerCard.value < cpuCard.value) {
-    cpuDeck.unshift(cpuCard, playerCard);
+    cpuDeck.push(cpuCard, playerCard);
     console.log("cpu wins!");
   } else {
-    war()
-    
+    war();
   }
 }
 
@@ -125,37 +125,47 @@ function war() {
   if (playerDeck.length < 5 || cpuDeck.length < 5) {
     if (playerDeck.length > cpuDeck.length) {
       length = cpuDeck.length - 1;
-    } else if ([playerDeck].length < cpuDeck.length) {
+    } else if (playerDeck.length < cpuDeck.length) {
       length = playerDeck.length - 1;
     }
   } else {
-    length = 4;
+    length = 3;
   }
-  for ( i = 0; i < length; i++) {
+  //keep adding cards from the playerdeck into the war array as long as i is less than the length(3)
+  for (i = 0; i < length; i++) {
     warArrayPl1.push(playerDeck[0]);
-    playerDeck.pop();
+    playerDeck.shift();
     warArrayCpu.push(cpuDeck[0]);
-    cpuDeck.pop();
-
-   compareValues(warArrayPl1[0], warArrayCpu[0])
+    cpuDeck.shift();
+    //another loop ?
+//need to push the winner of the war function's cards back into their deck
+    compareValues(warArrayPl1[0], warArrayCpu[0]);
     console.log("wartime");
-   
-   
   }
 
+  
 }
+//see if i can manually check second index of both, depending on the winner, take all cards out of both war arrays and add to the winners deck
 
-
-
-//function to compare the final card that gets flipped from the war
 
 //function to return all cards placed into any new array back into the origonal players deck array
+//use append or prepend???
 
 //function to set war array bvack to empty
 
+
 // function to check if either player is out of cards
-//if cpu is out, player 1 wins
-//if player 1 is out, cpu wins
+//if either player is out of cards, the draw button becomes hidden so that new game must be clicked
+function checkWin() {
+  if (playerDeck.length == 0) {
+    console.log("CPU Wins!");
+    // $("#battle").hide();
+  } else if (cpuDeck.length == 0) {
+    console.log("player1 Wins!");
+    // $("#battle").hide();
+  }
+}
+
 
 //window onload
 
