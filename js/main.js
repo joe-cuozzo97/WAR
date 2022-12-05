@@ -1,6 +1,6 @@
-///constants/variables
 let warArrayPl1 = [];
 let warArrayCpu = [];
+let winnerWarArr = [];
 let playerDeck = [];
 let cpuDeck = [];
 let playerCard = [];
@@ -11,7 +11,6 @@ const battleBtn = document.querySelector("#battle");
 const startBtn = document.querySelector("#start");
 const restartBtn = document.querySelector("#restart");
 
-/*----- event listeners -----*/
 battleBtn.addEventListener("click", () => {
   cardFaceoff();
 });
@@ -21,7 +20,6 @@ startBtn.addEventListener("click", () => {
   handout(cards);
 });
 
-/*----- functions -----*/
 function battle() {
   console.log("works");
 }
@@ -96,11 +94,10 @@ function handout(cards) {
 
 //function to take the first card out of the players hand of cards array and render them as a faceoff
 function cardFaceoff() {
-  // console.log('player cards should be this', playerDeck.pop())
   playerCard = playerDeck.shift();
-  console.log('players card is this', playerCard);
+  console.log("players card is this", playerCard);
   cpuCard = cpuDeck.shift();
-  console.log('cpu card is this', cpuCard);
+  console.log("cpu card is this", cpuCard);
   compareValues(playerCard, cpuCard);
 }
 //so far, ive set draw1 to the value of the last card in the playerdeck array.then i push draw1 into the playercard array, as the first card they draw to faceoff
@@ -121,15 +118,17 @@ function compareValues(playerCard, cpuCard) {
 //function to check if both playters have enough cards to have a full war, and if not, use the amount of cards that the person with less cards has
 function war() {
   let length = 0;
+  warArrayPl1.push(playerCard);
+  warArrayCpu.push(cpuCard);
 
-  if (playerDeck.length < 5 || cpuDeck.length < 5) {
+  if (playerDeck.length < 4 || cpuDeck.length < 4) {
     if (playerDeck.length > cpuDeck.length) {
       length = cpuDeck.length - 1;
     } else if (playerDeck.length < cpuDeck.length) {
       length = playerDeck.length - 1;
     }
   } else {
-    length = 3;
+    length = 4;
   }
   //keep adding cards from the playerdeck into the war array as long as i is less than the length(3)
   for (i = 0; i < length; i++) {
@@ -137,24 +136,35 @@ function war() {
     playerDeck.shift();
     warArrayCpu.push(cpuDeck[0]);
     cpuDeck.shift();
-    //another loop ?
-//need to push the winner of the war function's cards back into their deck
-    compareValues(warArrayPl1[0], warArrayCpu[0]);
-    console.log("wartime");
   }
-
+  winnerWarArr = warArrayPl1.concat(warArrayCpu);
+  console.log("wartime");
+  console.log(warArrayPl1);
+  console.log(warArrayCpu);
+  console.log(winnerWarArr)
   
-}
-//see if i can manually check second index of both, depending on the winner, take all cards out of both war arrays and add to the winners deck
 
+  if (warArrayPl1[4].value > warArrayCpu[4].value) {
+    console.log(winnerWarArr)
+    playerDeck = playerDeck.concat(winnerWarArr);   
+    warArrayPl1 = []
+    console.log("player wins this war!");
+  } else if (warArrayPl1[4].value < warArrayCpu[4].value) {
+    console.log(winnerWarArr)
+    cpuDeck = cpuDeck.concat(winnerWarArr);
+    warArrayCpu = []
+    console.log("cpu wins this war!");
+  } else {
+    console.log("another tie!");
+   war()
+  }
+}
+
+//see if i can manually check third index of both, depending on the winner, take all cards out of both war arrays and add to the winners deck
 
 //function to return all cards placed into any new array back into the origonal players deck array
 //use append or prepend???
 
-//function to set war array bvack to empty
-
-
-// function to check if either player is out of cards
 //if either player is out of cards, the draw button becomes hidden so that new game must be clicked
 function checkWin() {
   if (playerDeck.length == 0) {
@@ -165,10 +175,3 @@ function checkWin() {
     // $("#battle").hide();
   }
 }
-
-
-//window onload
-
-//create a "start game" button, then "new game" is the reset
-//set boolean to false so that the start button cant be clicked while in a game
-//on the new game button if the card count is equal to zero then
