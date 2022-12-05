@@ -13,6 +13,7 @@ const restartBtn = document.querySelector("#restart");
 
 battleBtn.addEventListener("click", () => {
   cardFaceoff();
+  styleThePile();
 });
 startBtn.addEventListener("click", () => {
   createDeck();
@@ -28,14 +29,12 @@ function startGame() {
   console.log("START");
 }
 
-//Card object
 function card(value, name, suit) {
   this.value = value;
   this.name - name;
   this.suit = suit;
 }
 
-//function to create a deck of 52 cards
 function createDeck() {
   this.names = [
     "1",
@@ -60,11 +59,9 @@ function createDeck() {
       cards.push(new card(n + 1, this.names[n], this.suits[s]));
     }
   }
-  // console.log("here are the cards: ", cards);
   return cards;
 }
 
-//function to shuffle the deck of cards
 function shuffle(cards) {
   console.log(cards);
   //starting at the length of the array minus 1, so we dont repeat the first card, for as long as i is greater than 0, subtract a card
@@ -141,31 +138,28 @@ function war() {
   console.log("wartime");
   console.log(warArrayPl1);
   console.log(warArrayCpu);
-  console.log(winnerWarArr)
-  
 
   if (warArrayPl1[4].value > warArrayCpu[4].value) {
-    console.log(winnerWarArr)
-    playerDeck = playerDeck.concat(winnerWarArr);   
-    warArrayPl1 = []
+    console.log(winnerWarArr);
+    playerDeck = playerDeck.concat(winnerWarArr);
+    warArrayPl1 = [];
+    warArrayCpu = [];
+    winnerWarArr = [];
     console.log("player wins this war!");
   } else if (warArrayPl1[4].value < warArrayCpu[4].value) {
-    console.log(winnerWarArr)
+    console.log(winnerWarArr);
     cpuDeck = cpuDeck.concat(winnerWarArr);
-    warArrayCpu = []
+    warArrayCpu = [];
+    warArrayPl1 = [];
+    winnerWarArr = [];
     console.log("cpu wins this war!");
   } else {
     console.log("another tie!");
-   war()
+    war();
   }
 }
 
-//see if i can manually check third index of both, depending on the winner, take all cards out of both war arrays and add to the winners deck
-
-//function to return all cards placed into any new array back into the origonal players deck array
-//use append or prepend???
-
-//if either player is out of cards, the draw button becomes hidden so that new game must be clicked
+// if either player is out of cards, the draw button becomes hidden so that new game must be clicked
 function checkWin() {
   if (playerDeck.length == 0) {
     console.log("CPU Wins!");
@@ -175,3 +169,15 @@ function checkWin() {
     // $("#battle").hide();
   }
 }
+
+function styleThePile(playerCard) {
+  const drawPile = document.getElementById("p1DrawPile");
+  console.log('This is the draw pile', drawPile)
+  drawPile.classList.add(`card.${playerCard.suit}.r0${playerCard.value}`)
+  console.log(drawPile.classList.length);
+  console.log(drawPile.classList)
+}
+//make sure this is called AFTER card is drawn
+
+
+// drawPile.classList.add(`card.${playerCard.1}.r0${playerCard.0}`)

@@ -46,22 +46,22 @@
 .card.♦A {
   background-image: url("../images/diamonds/diamonds-A.svg"); }
 
-.card.diamonds.K,
+.card.diamonds.r013,
 .card.dK,
 .card.♦K {
   background-image: url("../images/diamonds/diamonds-K.svg"); }
 
-.card.diamonds.Q,
+.card.diamonds.r012,
 .card.dQ,
 .card.♦Q {
   background-image: url("../images/diamonds/diamonds-Q.svg"); }
 
-.card.diamonds.J,
+.card.diamonds.r011,
 .card.dJ,
 .card.♦J {
   background-image: url("../images/diamonds/diamonds-J.svg"); }
 
-.card.diamonds.r10,
+.card.diamonds.r010,
 .card.d10,
 .card.♦10 {
   background-image: url("../images/diamonds/diamonds-r10.svg"); }
