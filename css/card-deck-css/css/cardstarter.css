@@ -107,7 +107,7 @@
   background-image: url("../images/diamonds/diamonds-r02.svg"); }
 
 .card.hearts.A,
-.card.h1,
+.card.h01,
 .card.♥A {
   background-image: url("../images/hearts/hearts-A.svg"); }
 
@@ -376,4 +376,8 @@ text-align: center;
 }
  .btns{
   text-align: center;
+ }
+ button:disabled{
+background-color: grey;
+cursor: none;
  }
