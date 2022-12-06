@@ -6,7 +6,6 @@ let cpuDeck = [];
 let playerCard = [];
 let cpuCard = [];
 let cards = [];
-let gameIsBeingPlayed = true
 
 const battleBtn = document.querySelector("#battle");
 const startBtn = document.querySelector("#start");
@@ -14,13 +13,20 @@ const restartBtn = document.querySelector("#restart");
 
 battleBtn.addEventListener("click", () => {
   cardFaceoff();
-  // styleThePile();
-  checkWin()
+  styleThePile(playerCard, cpuCard);
+  checkWin();
+  if (checkWin()) {
+    battleBtn.disabled = true;
+    startBtn.disabled = true;
+  }
 });
 startBtn.addEventListener("click", () => {
   createDeck();
   shuffle(cards);
   handout(cards);
+  if (createDeck()) {
+    startBtn.disabled = true;
+  }
 });
 
 function battle() {
@@ -39,21 +45,21 @@ function card(value, name, suit) {
 
 function createDeck() {
   this.names = [
-    "1",
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "7",
-    "8",
-    "9",
+    "01",
+    "02",
+    "03",
+    "04",
+    "05",
+    "06",
+    "07",
+    "08",
+    "09",
     "10",
-    "j",
-    "q",
-    "k",
+    "11",
+    "12",
+    "13",
   ];
-  this.suits = ["Diamonds", "Spades", "Clubs", "Hearts"];
+  this.suits = ["d", "s", "c", "h"];
   cards = [];
 
   for (let s = 0; s < this.suits.length; s++) {
@@ -138,14 +144,20 @@ function war() {
   console.log(warArrayPl1);
   console.log(warArrayCpu);
 
-  if (warArrayPl1[4].value > warArrayCpu[4].value) {
+  if (
+    warArrayPl1[warArrayPl1.length - 1].value >
+    warArrayCpu[warArrayCpu.length - 1].value
+  ) {
     console.log(winnerWarArr);
     playerDeck = playerDeck.concat(winnerWarArr);
     warArrayPl1 = [];
     warArrayCpu = [];
     winnerWarArr = [];
     console.log("player wins this war!");
-  } else if (warArrayPl1[4].value < warArrayCpu[4].value) {
+  } else if (
+    warArrayPl1[warArrayPl1.length - 1].value <
+    warArrayCpu[warArrayCpu.length - 1].value
+  ) {
     console.log(winnerWarArr);
     cpuDeck = cpuDeck.concat(winnerWarArr);
     warArrayCpu = [];
@@ -154,93 +166,108 @@ function war() {
     console.log("cpu wins this war!");
   } else {
     console.log("another tie!");
-    war();
+    warArrayCpu = [];
+    warArrayPl1 = [];
+    winnerWarArr = [];
+    war()
   }
 }
 
 function checkWin() {
-  if (playerDeck.length == 0) {
-    console.log("CPU Wins!");
-    // $("#battle").hide();
-  } else if (cpuDeck.length == 0) {
-    console.log("player1 Wins!");
-    // $("#battle").hide();
+  if (playerDeck.length === 0) {
+    console.log("CPU Wins The Game!");
+    //if true, render "player _ wins the game!"
+    battleBtn.disabled = true;
+    startBtn.disabled = true;
+  } else if (cpuDeck.length === 0) {
+    console.log("player1 Wins The Game!");
+    //if true, render "player _ wins the game!"
+    battleBtn.disabled = true;
+    startBtn.disabled = true;
   }
 }
 
-function styleThePile(playerCard) {
-  const drawPile = document.getElementById("p1DrawPile");
-  console.log('This is the draw pile', drawPile)
+function styleThePile(playerCard, cpuCard) {
+  let drawPile = document.getElementById("p1DrawPile");
+  drawPile.className = "card shadow xlarge";
+  let cpuDrawPile = document.getElementById("cpuDrawPile");
+  cpuDrawPile.className = "card shadow xlarge";
+
+  if (playerCard.value < 10) {
+    drawPile.classList.add(`${playerCard.suit}0${playerCard.value}`);
+  } else {
+    drawPile.classList.add(`${playerCard.suit}${playerCard.value}`);
+  }
+
+  if (cpuCard.value < 10) {
+    cpuDrawPile.classList.add(`${cpuCard.suit}0${cpuCard.value}`);
+  } else {
+    cpuDrawPile.classList.add(`${cpuCard.suit}${cpuCard.value}`);
+  }
+
   const cardMap = {
     Diamonds: {
-      1:'d01',
-      2:'d02',
-      3:'d03',
-      4:'d04',
-      5:'d05',
-      6:'d06',
-      7:'d07',
-      8:'d08',
-      9:'d09',
-      10:'d10',
-      11:'d11',
-      12:'d12',
-      13:'d13',
+      1: "d01",
+      2: "d02",
+      3: "d03",
+      4: "d04",
+      5: "d05",
+      6: "d06",
+      7: "d07",
+      8: "d08",
+      9: "d09",
+      10: "d10",
+      11: "d11",
+      12: "d12",
+      13: "d13",
     },
     Hearts: {
-      1:'h01',
-      2:'h02',
-      3:'h03',
-      4:'h04',
-      5:'h05',
-      6:'h06',
-      7:'h07',
-      8:'h08',
-      9:'h09',
-      10:'h10',
-      11:'h11',
-      12:'h12',
-      13:'h13',
+      1: "h01",
+      2: "h02",
+      3: "h03",
+      4: "h04",
+      5: "h05",
+      6: "h06",
+      7: "h07",
+      8: "h08",
+      9: "h09",
+      10: "h10",
+      11: "h11",
+      12: "h12",
+      13: "h13",
     },
-    Spades:{
-      1:'s01',
-      2:'s02',
-      3:'s03',
-      4:'s04',
-      5:'s05',
-      6:'s06',
-      7:'s07',
-      8:'s08',
-      9:'s09',
-      10:'s10',
-      11:'s11',
-      12:'s12',
-      13:'s13',
+    Spades: {
+      1: "s01",
+      2: "s02",
+      3: "s03",
+      4: "s04",
+      5: "s05",
+      6: "s06",
+      7: "s07",
+      8: "s08",
+      9: "s09",
+      10: "s10",
+      11: "s11",
+      12: "s12",
+      13: "s13",
     },
-    Clubs:{
-      1:'c01',
-      2:'c02',
-      3:'c03',
-      4:'c04',
-      5:'c05',
-      6:'c06',
-      7:'c07',
-      8:'c08',
-      9:'c09',
-      10:'c10',
-      11:'c11',
-      12:'c12',
-      13:'c13',
-    }
-
-  }
-
+    Clubs: {
+      1: "c01",
+      2: "c02",
+      3: "c03",
+      4: "c04",
+      5: "c05",
+      6: "c06",
+      7: "c07",
+      8: "c08",
+      9: "c09",
+      10: "c10",
+      11: "c11",
+      12: "c12",
+      13: "c13",
+    },
+  };
 }
 
-//make sure this is called AFTER card is drawn
-
-
-// drawPile.classList.add(`card.${playerCard.1}.r0${playerCard.0}`)
-
-//need to make sure the winner of the round and the game have their name pop up to alert them
-//score needs to be visible on screen
+//need to make sure the winner of the round/game and the game have their name pop up to alert them
+//cardcount needs to be visible on screen and updating every turn
