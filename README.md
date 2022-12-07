@@ -22,4 +22,5 @@ I would like to have all of the war cards on screen so it can be a bit more enga
 ![Screen Shot 2022-12-07 at 11 55 13 AM](https://user-images.githubusercontent.com/118827974/206241816-aa20c1da-68e1-4444-9813-586d1d9e6abe.png)
 
 
+![Screen Shot 2022-12-07 at 12 54 45 PM](https://user-images.githubusercontent.com/118827974/206258838-639f68e5-2b4f-4bfc-a12a-c145c3fa98bc.png)
 
