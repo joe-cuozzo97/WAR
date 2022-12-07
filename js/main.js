@@ -1,3 +1,5 @@
+// Variables
+
 let warArrayPl1 = [];
 let warArrayCpu = [];
 let winnerWarArr = [];
@@ -16,6 +18,7 @@ let cpuWinLoss = document.querySelector('.cpuWinLoss')
 const battleBtn = document.querySelector("#battle");
 const startBtn = document.querySelector("#start");
 const restartBtn = document.querySelector("#restart");
+
 
 battleBtn.addEventListener("click", () => {
   cardFaceoff();
@@ -110,9 +113,6 @@ function cardFaceoff() {
 function compareValues(playerCard, cpuCard) {
   if (playerCard.value > cpuCard.value) {
     playerDeck.push(playerCard, cpuCard);
-    // let pOneCardCount = playerDeck.length;
-    // $("p").html(pOneCardCount);
-    // return "This is the player card count: " + playerDeck.length;
     console.log("player1 wins!");
     const playerMessage = document.createElement('p')
     const playerMessageText = document.createTextNode('Player1 Wins!')
@@ -133,8 +133,6 @@ cpuCardsLeft.appendChild(cpuCountMessage)
 }, 1000)
 } else if (playerCard.value < cpuCard.value) {
     cpuDeck.push(cpuCard, playerCard);
-    // let cpuCardCount = cpuDeck.length;
-    // $(".result").html("CPU wins!");
     console.log("cpu wins!");
     const cpuMessage = document.createElement('p')
     const cpuMessageText = document.createTextNode('CPU Wins!')
@@ -237,75 +235,4 @@ function styleThePile(playerCard, cpuCard) {
     cpuDrawPile.classList.add(`${cpuCard.suit}${cpuCard.value}`);
   }
 
-  //   const cardMap = {
-  //     Diamonds: {
-  //       1: "d01",
-  //       2: "d02",
-  //       3: "d03",
-  //       4: "d04",
-  //       5: "d05",
-  //       6: "d06",
-  //       7: "d07",
-  //       8: "d08",
-  //       9: "d09",
-  //       10: "d10",
-  //       11: "d11",
-  //       12: "d12",
-  //       13: "d13",
-  //     },
-  //     Hearts: {
-  //       1: "h01",
-  //       2: "h02",
-  //       3: "h03",
-  //       4: "h04",
-  //       5: "h05",
-  //       6: "h06",
-  //       7: "h07",
-  //       8: "h08",
-  //       9: "h09",
-  //       10: "h10",
-  //       11: "h11",
-  //       12: "h12",
-  //       13: "h13",
-  //     },
-  //     Spades: {
-  //       1: "s01",
-  //       2: "s02",
-  //       3: "s03",
-  //       4: "s04",
-  //       5: "s05",
-  //       6: "s06",
-  //       7: "s07",
-  //       8: "s08",
-  //       9: "s09",
-  //       10: "s10",
-  //       11: "s11",
-  //       12: "s12",
-  //       13: "s13",
-  //     },
-  //     Clubs: {
-  //       1: "c01",
-  //       2: "c02",
-  //       3: "c03",
-  //       4: "c04",
-  //       5: "c05",
-  //       6: "c06",
-  //       7: "c07",
-  //       8: "c08",
-  //       9: "c09",
-  //       10: "c10",
-  //       11: "c11",
-  //       12: "c12",
-  //       13: "c13",
-  //     },
-  //   };
-  // }
 }
-
-//make sure this is called AFTER card is drawn
-
-
-// drawPile.classList.add(`card.${playerCard.1}.r0${playerCard.0}`)
-
-//need to make sure the winner of the round and the game have their name pop up to alert them
-//score needs to be visible on screen
