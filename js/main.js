@@ -7,6 +7,12 @@ let playerCard = [];
 let cpuCard = [];
 let cards = [];
 
+let playerWinsGame = document.querySelector('.playerWinsGame')
+let cpuWinsGame = document.querySelector('.cpuWinsGame')
+let playerCardsLeft = document.querySelector('.playerCardsLeft')
+let cpuCardsLeft = document.querySelector('.cpuCardsLeft')
+let playerWinLoss = document.querySelector('.playerWinLoss')
+let cpuWinLoss = document.querySelector('.cpuWinLoss')
 const battleBtn = document.querySelector("#battle");
 const startBtn = document.querySelector("#start");
 const restartBtn = document.querySelector("#restart");
@@ -15,8 +21,6 @@ battleBtn.addEventListener("click", () => {
   cardFaceoff();
   styleThePile(playerCard, cpuCard);
   checkWin();
-  console.log("this is the players deck:", playerDeck);
-  console.log("this is the cpu deck:", cpuDeck);
   if (checkWin()) {
     battleBtn.disabled = true;
     startBtn.disabled = true;
@@ -32,11 +36,9 @@ startBtn.addEventListener("click", () => {
 });
 
 function battle() {
-  console.log("works");
 }
 
 function startGame() {
-  console.log("START");
 }
 
 function card(value, name, suit) {
@@ -73,7 +75,6 @@ function createDeck() {
 }
 
 function shuffle(cards) {
-  console.log(cards);
   //starting at the length of the array minus 1, so we dont repeat the first card, for as long as i is greater than 0, subtract a card
   for (let i = cards.length - 1; i > 0; i--) {
     const r = Math.floor(Math.random() * (i + 1));
@@ -93,20 +94,19 @@ function handout(cards) {
       cpuDeck.push(cards[i]);
     }
   }
-  console.log("Player's deck: ", playerDeck);
-  console.log("Opponent's deck: ", cpuDeck);
 }
 
 function cardFaceoff() {
   playerCard = playerDeck.shift();
-  console.log("players card is this", playerCard);
+  // console.log("players card is this", playerCard);
   cpuCard = cpuDeck.shift();
-  console.log("cpu card is this", cpuCard);
+  // console.log("cpu card is this", cpuCard);
   compareValues(playerCard, cpuCard);
 }
 //so far, ive set draw1 to the value of the last card in the playerdeck array.then i push draw1 into the playercard array, as the first card they draw to faceoff
 
 //function to compare each players card
+
 function compareValues(playerCard, cpuCard) {
   if (playerCard.value > cpuCard.value) {
     playerDeck.push(playerCard, cpuCard);
@@ -114,11 +114,45 @@ function compareValues(playerCard, cpuCard) {
     // $("p").html(pOneCardCount);
     // return "This is the player card count: " + playerDeck.length;
     console.log("player1 wins!");
-  } else if (playerCard.value < cpuCard.value) {
+    const playerMessage = document.createElement('p')
+    const playerMessageText = document.createTextNode('Player1 Wins!')
+    playerMessage.appendChild(playerMessageText)
+    playerWinLoss.append(playerMessage)
+    setTimeout(()=> {
+      playerWinLoss.removeChild(playerMessage)
+  }, 1500)
+  let countMessage = document.createTextNode(`Cards Left: ${playerDeck.length}`)
+  playerCardsLeft.appendChild(countMessage)
+  setTimeout(()=> {
+    playerCardsLeft.removeChild(countMessage)
+}, 1000)
+let cpuCountMessage = document.createTextNode(`Cards Left: ${cpuDeck.length}`)
+cpuCardsLeft.appendChild(cpuCountMessage)
+  setTimeout(()=> {
+  cpuCardsLeft.removeChild(cpuCountMessage)
+}, 1000)
+} else if (playerCard.value < cpuCard.value) {
     cpuDeck.push(cpuCard, playerCard);
     // let cpuCardCount = cpuDeck.length;
     // $(".result").html("CPU wins!");
     console.log("cpu wins!");
+    const cpuMessage = document.createElement('p')
+    const cpuMessageText = document.createTextNode('CPU Wins!')
+    cpuMessage.appendChild(cpuMessageText)
+    cpuWinLoss.append(cpuMessage)
+    setTimeout(()=> {
+      cpuWinLoss.removeChild(cpuMessage)
+  }, 1500)
+  let cpuCountMessage = document.createTextNode(`Cards Left: ${cpuDeck.length}`)
+cpuCardsLeft.appendChild(cpuCountMessage)
+  setTimeout(()=> {
+  cpuCardsLeft.removeChild(cpuCountMessage)
+}, 1000)
+let countMessage = document.createTextNode(`Cards Left: ${playerDeck.length}`)
+playerCardsLeft.appendChild(countMessage)
+setTimeout(()=> {
+  playerCardsLeft.removeChild(countMessage)
+}, 1000)
   } else {
     war();
   }
@@ -147,32 +181,24 @@ function war() {
     cpuDeck.shift();
   }
   winnerWarArr = warArrayPl1.concat(warArrayCpu);
-  console.log("wartime");
-  console.log(warArrayPl1);
-  console.log(warArrayCpu);
 
   if (
     warArrayPl1[warArrayPl1.length - 1].value >
     warArrayCpu[warArrayCpu.length - 1].value
   ) {
-    console.log(winnerWarArr);
     playerDeck = playerDeck.concat(winnerWarArr);
     warArrayPl1 = [];
     warArrayCpu = [];
     winnerWarArr = [];
-    console.log("player wins this war!");
   } else if (
     warArrayPl1[warArrayPl1.length - 1].value <
     warArrayCpu[warArrayCpu.length - 1].value
   ) {
-    console.log(winnerWarArr);
     cpuDeck = cpuDeck.concat(winnerWarArr);
     warArrayCpu = [];
     warArrayPl1 = [];
     winnerWarArr = [];
-    console.log("cpu wins this war!");
   } else {
-    console.log("another tie!");
     warArrayCpu = [];
     warArrayPl1 = [];
     winnerWarArr = [];
@@ -183,13 +209,11 @@ function war() {
 
 function checkWin() {
   if (playerDeck.length === 0) {
-    console.log("CPU Wins The Game!");
-    // render "player wins the game!"
+playerCardsLeft.innerHTML = 'CPU Wins the Game!'
     battleBtn.disabled = true;
     startBtn.disabled = true;
   } else if (cpuDeck.length === 0) {
-    console.log("player1 Wins The Game!");
-    //if render "cpu wins the game!"
+cpuCardsLeft.innerHTML = 'Player1 Wins the Game'
     battleBtn.disabled = true;
     startBtn.disabled = true;
   }
@@ -277,3 +301,11 @@ function styleThePile(playerCard, cpuCard) {
   //   };
   // }
 }
+
+//make sure this is called AFTER card is drawn
+
+
+// drawPile.classList.add(`card.${playerCard.1}.r0${playerCard.0}`)
+
+//need to make sure the winner of the round and the game have their name pop up to alert them
+//score needs to be visible on screen
