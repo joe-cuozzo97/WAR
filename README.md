@@ -16,7 +16,7 @@ rules:
 
 
 Icebox:
-I would like to have all of the war cards on screen so it can be a bit more engaging when there is a tie. Wars are the main point of the game so having those on screen would be a nice addition.I would also add a points function so if players wanted to quit the game before it finishes, we can see who was winning the game.
+I would like to have all of the war cards on screen so it can be a bit more engaging when there is a tie. Wars are the main point of the game so having those on screen would be a nice addition. I would also add a points function so if players wanted to quit the game before it finishes, we can see who was winning the game.
 
 
 ![Screen Shot 2022-12-07 at 11 55 13 AM](https://user-images.githubusercontent.com/118827974/206241816-aa20c1da-68e1-4444-9813-586d1d9e6abe.png)
